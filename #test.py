@@ -1,4 +1,8 @@
 import numpy as np
+import tests
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
 
 def augment_matrix(X):
     return np.c_[np.ones((X.shape[0], 1)), X]
@@ -26,7 +30,7 @@ class MyLinearRegression:
         # replace the code below (which returns random values for theta) with your solution to return the correct solution for theta
         # START EXERCISE 1.1 #
         # Theta = (X^TX)^-1 X^Ty
-        matrix_A = np.inv((np.transpose(X))*X)
+        matrix_A = np.linalg.inv((np.transpose(X))*X)
         vector_B = (np.transpose(X))*y
         self.theta = matrix_A*vector_B
         # self.theta = np.random.randn(n_features)
@@ -40,6 +44,8 @@ class MyLinearRegression:
 
         # replace the code below (which returns random values for theta) with your solution to return the correct solution for theta
         # START EXERCISE 1.2 #
+        # prediction = X*self.theta
+        # gradient_direction = 
         self.theta = np.random.randn(n_features)
         # END EXERCISE 1.2 #
 
@@ -50,8 +56,4 @@ class MyLinearRegression:
         return X_b.dot(self.theta)
 
 X = np.array([[1,2],[3,4]])
-# print(augment_matrix(X))
-import tests
-import numpy as np
-from sklearn.linear_model import LinearRegression
 tests.linear_regression(MyLinearRegression, LinearRegression, epochs=1000, learning_rate=0.01)
